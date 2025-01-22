@@ -1,0 +1,13 @@
+{% extends "data.html" %}
+
+{% block form %}
+
+{% if mode == "add" %}
+    <form id="add-form" action="/clients/add" method="post">
+        <input type="text" name="clients_name" placeholder="Imię" required>
+        <input type="text" name="clients_surname" placeholder="Nazwisko" required>
+        <input type="text" name="clients_phone" placeholder="Telefon" required>
+        <button type="submit">Dodaj klienta</button>
+    </form>
+{% endif %}
+{% endblock %}

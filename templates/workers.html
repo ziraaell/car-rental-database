@@ -1,0 +1,19 @@
+{% extends "data.html" %}
+
+{% block form %}
+
+{% if mode == "add" %}
+    <form id="add-form" action="/workers/add" method="post">
+        <input type="text" id="workers_name" name="workers_name" placeholder="Imię" required>
+        <input type="text" id="workers_surname" name="workers_surname" placeholder="Nazwisko" required>
+        <input type="text" name="workers_phone" placeholder="Telefon" required>
+        <select id="role_id" name="role_id" required>
+            <option value="" disabled selected>Wybierz stanowisko</option>
+            {% for rola in data_set[0]%}
+                <option value="{{ rola.id_rola }}">{{rola.nazwa}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Dodaj pracownika</button>
+    </form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "data.html" %}
+
+{% block form %}
+
+
+{% if mode == "add" %}
+    <form id="add-form" action="/models/add" method="post">
+        <input type="text" name="models_model_name" placeholder="Nazwa modelu" required>
+
+        <select id="brand_id" name="model_brand_id" required>
+            <option value="" disabled selected>Wybierz markę</option>
+            {% for brand in data_set[0]%}
+                <option value="{{ brand.id_marka }}">{{brand.nazwa_marki }}</option>
+            {% endfor %}
+        </select>
+
+        <select id="class_id" name="class_id" required>
+            <option value="" disabled selected>Wybierz klase</option>
+            {% for car_class in data_set[1]%}
+                <option value="{{ car_class.id_klasa }}">{{car_class.nazwa }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Dodaj model</button>
+    </form>
+{% endif %}
+{% endblock %}

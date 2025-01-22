@@ -1,0 +1,41 @@
+{% extends "data.html" %}
+
+{% block button %}
+{% endblock %}
+
+{% block form %}
+
+{% if mode == "add" %}
+    <form id="add-form" action="/rentals/add" method="post">
+        <input list="clients" id="rentals_clients_id" name="rentals_clients_id" required placeholder="Wybierz klienta">
+        <datalist id="clients" style="overflow-y: auto; max-height: 50px;">
+            {% for client in data_set[0] %}
+                <option value="{{ client.imie ~ ' ' ~ client.nazwisko }}" data-id="{{ client.id_klient }}"></option>
+            {% endfor %}
+        </datalist>
+
+        <select id="rental_brand_id" name="rental_brand_id" required>
+            <option value="" disabled selected>Wybierz markę</option>
+            {% for brand in data_set[2]%}
+                <option value="{{ brand.id_marka }}">{{brand.nazwa_marki }}</option>
+            {% endfor %}
+        </select>
+
+        <select id="rental_model_id" name="rental_model_id" required>
+            <option value="" disabled selected>Wybierz model</option>
+            {% for model in data_set[1]%}
+                <option value="{{ model.id_model }}">{{model.nazwa_modelu }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="rental_date">Wybierz datę poczatkową:</label>
+        <br>
+        <input type="date" id="rental_date" name="rental_date" required>
+        <br>
+        <label for="rental_date">Wybierz datę końcową:</label>
+        <br>
+        <input type="date" id="rental_date" name="rental_date" required>
+        <button type="submit">Dodaj zamówienie</button>
+    </form>
+{% endif %}
+{% endblock %}

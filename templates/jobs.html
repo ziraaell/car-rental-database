@@ -1,0 +1,17 @@
+{% extends "data.html" %}
+
+{% block form %}
+
+{% if mode == "add" %}
+    <form id="add-form" action="/jobs/add" method="post">
+        <input type="text" id="role_name" name="role_name" placeholder="Nazwa stanowiska" required>
+        <input type="number" id="role_salary" name="role_salary" placeholder="Wypłata" required>
+        <select id="can_rent_id" name="can_rent_id" required>
+            <option value="" disabled selected>Czy może wynajmować auta</option>
+            <option value="True">Tak</option>
+            <option value="False">Nie</option>
+        </select>
+        <button type="submit">Dodaj stanowisko</button>
+    </form>
+{% endif %}
+{% endblock %}

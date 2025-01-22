@@ -1,0 +1,31 @@
+{% extends "data.html" %}
+{% block form%}
+    <form id = "form" action ="/events/add" method="post"></form>
+{% endblock %}
+
+{%  block add %}
+    <tr>
+    <td><input type="date" name="year" form="form"  required/></td>
+    <td><input type="date" name="year1" form="form"  required/></td>
+        <td><select  name="movie" form="form"  required>
+    {% for  role, id in movies %}
+        <option value = "{{ id }}">{{ role }}</option>
+        {% endfor %}
+    </select>
+            <td><select  name="user" form="form"  required>
+    {% for  role, id in users %}
+        <option value = "{{ id }}">{{ role }}</option>
+        {% endfor %}
+    </select>
+                <td><select  name="worker" form="form"  required>
+    {% for  role, id in workers %}
+        <option value = "{{ id }}">{{ role }}</option>
+        {% endfor %}
+    </select>
+
+    </tr>
+{% endblock %}
+
+{% block button %}
+ <button type="submit" form="form">Dodaj</button>
+{% endblock %}

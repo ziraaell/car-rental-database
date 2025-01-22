@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+
+{% block add %}
+<tr>
+    <td><input type="text" name="name" form="form" placeholder="Nazwa kategorii" required /></td>
+</tr>
+{% endblock %}
+
+{% block button %}
+    <form id="form" action="/data" method="post">
+        <input type="hidden" name="context" value="{{ context }}">
+        <button type="submit" name="action" value="add">Dodaj rekord</button>
+    </form>
+{% endblock %}
+
+{% block div %}
+<article style="text-align: center">
+    <h2>{{ title }}</h2>
+
+    {% block form %}
+    {% endblock %}
+
+    <table id="data-table">
+        <thead>
+            <tr>
+                {% for label in labels %}
+                    <th>{{ label }}</th>
+                {% endfor %}
+                <!-- <th>Usuń rekord</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in data %}
+            <!-- <tr onclick="location.href = window.location.href + '/' + '{{ obj[0] }}'"> -->
+                {% for value in obj %}
+                <td>{{ value }}</td>
+                {% endfor %}
+                <td>
+                    <form method="POST" onsubmit="this.action = window.location.pathname + '/delete/' + '{{ obj[0] }}';">
+                        <button id="delete-record" type="submit" onclick="return confirm('Czy na pewno chcesz usunąć ten rekord?');" style="background: none; border: none; color: red; cursor: pointer;">
+                            <span class = "delete">&times;</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+</article>
+
+{% endblock %}
+

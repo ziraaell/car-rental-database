@@ -1,0 +1,11 @@
+{% extends "data.html" %}
+
+{% block form %}
+{% if mode == "add" %}
+    <form id="add-form" action="/classes/add" method="post">
+        <input type="text" name="classes_class_name" placeholder="Klasa" required>
+        <textarea name="description" id="description" placeholder="Opis" rows="1"></textarea>
+        <button type="submit">Dodaj klasę</button>
+    </form>
+{% endif %}
+{% endblock %}

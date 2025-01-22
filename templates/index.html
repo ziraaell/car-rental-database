@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title> Logowanie </title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <h1 onclick="location.href='/'">Wypożyczalnia samochodów
+            <img src="{{ url_for('static', filename='car.png') }}" id="car-image">
+        </h1>
+    </header>
+        <nav>
+            <ul>
+                <li onclick="location.href='/cars'">Auta</li>
+                <li onclick="location.href='/models'">Modele</li>
+                <li onclick="location.href='/brands'">Marki</li>
+                <li onclick="location.href='/classes'">Klasy aut</li>
+                <li onclick="location.href='/clients'">Klienci</li>
+                <li onclick="location.href='/workers'">Pracownicy</li>
+                <li onclick="location.href='/jobs'">Stanowiska</li>
+                <li>
+                    Wypożyczenia
+                    <ul>
+                        <li onclick="location.href='/rentals'">Wypożyczenia</li>
+                        <!-- <li onclick="location.href='/add-rental'">Koszty wypożyczeń</li> -->
+                        <li onclick="location.href='/orders'">Lista zamówień</li>
+                    </ul>
+                </li>
+                <li onclick="location.href='/orders'">Płatności</li>
+                <li onclick="location.href='/orders'">Raporty</li>
+                <li onclick="location.href='/pricelist'">Cennik</li>
+            </ul>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div id="flash-messages">
+            <div class="content">
+                <span class = "close">&times;</span>
+            {% for category, message in messages %}
+                <!-- <span class = "close">&times;</span> -->
+              <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+    <div class = "main" style="text-align: center;">
+        {% block button %}
+        {% endblock %}
+
+        {% block  div %}
+        <dl>
+            <dt>Witaj w systemie zarządzania wypożyczalnią samochodów!</dt>
+            <dd>Nasza strona ułatwia obsługę wypożyczalni samochodów, umożliwiając sprawne zarządzanie ofertą pojazdów oraz danymi klientów i pracowników.</dd>
+            <dt>Dzięki niej możesz:</dt> 
+            <dd>przeglądać dostępne samochody,</dd>  
+            <dd>dodawać nowe modele i kategorie pojazdów,</dd>   
+            <dd>rejestrować wypożyczenia oraz ich historię,</dd>
+            <dd>monitorować opłaty, w tym kary i zaległości klientów.</dd>
+            <dt>System został zaprojektowany tak, aby usprawnić codzienne zarządzanie wypożyczalnią i zapewnić pełną przejrzystość operacji.</dt> 
+             <dt>związane z klientami i pracownikami wypożyczalni:</dt>
+            <dd>wypożyczenia filmów,</dd>
+            <dd>kary nałożone na klientów,</dd>
+            <dd>stanowiska pracowników.</dd> 
+        </dl>
+        {% endblock %}
+    </div>
+</body>
+</html>

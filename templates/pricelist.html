@@ -1,0 +1,12 @@
+{% extends "data.html" %}
+
+{% block form %}
+
+
+{% if mode == "add" %}
+    <form id="add-form" action="/brands/add" method="post">
+        <input type="text" name="brands_brand_name" placeholder="Nazwa marki" required>
+        <button type="submit">Dodaj markę</button>
+    </form>
+{% endif %}
+{% endblock %}
