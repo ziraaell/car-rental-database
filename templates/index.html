@@ -27,12 +27,17 @@
                     Wypożyczenia
                     <ul>
                         <li onclick="location.href='/rentals'">Wypożyczenia</li>
-                        <!-- <li onclick="location.href='/add-rental'">Koszty wypożyczeń</li> -->
                         <li onclick="location.href='/orders'">Lista zamówień</li>
                     </ul>
                 </li>
-                <li onclick="location.href='/orders'">Płatności</li>
-                <li onclick="location.href='/orders'">Raporty</li>
+                <li onclick="location.href='/payments'">Płatności</li>
+                <li> Raporty
+                    <ul>
+                        <li onclick="location.href='/incomes/all'">Podsumowanie finansowe</li>
+                        <li onclick="location.href='/available_cars'">Dostępność aut</li>
+                        <li onclick="location.href='/popular_cars'">Najpopularniejsze auta</li>
+                    </ul>
+                </li>
                 <li onclick="location.href='/pricelist'">Cennik</li>
             </ul>
         </nav>
@@ -43,7 +48,6 @@
             <div class="content">
                 <span class = "close">&times;</span>
             {% for category, message in messages %}
-                <!-- <span class = "close">&times;</span> -->
               <div class="flash-message {{ category }}">{{ message }}</div>
             {% endfor %}
             </div>

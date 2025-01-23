@@ -10,6 +10,9 @@ from sqlalchemy.sql import text
 import os
 from flask import jsonify
 from sqlalchemy import func
+import warnings
+from sqlalchemy.exc import SAWarning
+warnings.filterwarnings("ignore", category=SAWarning)
 
 load_dotenv()
 DB_URL = os.getenv('DATABASE_URL') 
@@ -29,6 +32,7 @@ class Brand(db.Model):
     Attributes:
         id_marka (int): Klucz główny, identyfikator marki.
         nazwa_marki (str): Nazwa marki pojazdu.
+    :no-index:
     """
     __tablename__ = 'marki'
     __table_args__ = (
@@ -55,6 +59,7 @@ class Model(db.Model):
         auta (relationship): Relacja do tabeli 'Car', reprezentująca wszystkie samochody należące do tego modelu.
         klasa (relationship): Relacja do tabeli 'CarClass', określająca klasę, do której przypisany jest model.
         zamowienia (relationship): Relacja do tabeli 'Order', reprezentująca zamówienia, w których wskazano dany model samochodu.
+    :no-index:
     """
     __tablename__ = 'modele'
     __table_args__ = (
@@ -72,6 +77,17 @@ class Model(db.Model):
 
 
 class CarClass(db.Model):
+    """
+    Model tabeli 'klasa', reprezentujący klasy samochodów w systemie wypożyczalni.
+
+    Attributes:
+        id_klasa (int): Klucz główny, unikalny identyfikator klasy samochodu.
+        nazwa (str): Nazwa klasy samochodu (np. "B", "C", "SUV").
+        opis (str): Opcjonalny opis klasy samochodu, zawierający szczegóły dotyczące jej charakterystyki.
+        model_k (list[Model]): Relacja do modeli samochodów (Model) powiązanych z daną klasą.
+        cennik (list[PriceList]): Relacja do tabeli 'cennik', zawierająca informacje o stawkach za wynajem dla danej klasy samochodów.
+    :no-index:
+    """
     __tablename__ = 'klasa'
     __table_args__ = (
     {'schema': 'wypozyczalnia'},
@@ -97,6 +113,7 @@ class Car(db.Model):
     Relationships:
         model_a (relationship): Relacja do tabeli 'Model', określająca model pojazdu.
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia, w których uczestniczy ten samochód.
+    :no-index:
     """
     __tablename__ = 'auta'
     __table_args__ = (
@@ -123,6 +140,7 @@ class Client(db.Model):
     Relationships:
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia wykonane przez klienta.
         zamowienia (relationship): Relacja do tabeli 'Order', reprezentująca zamówienia klienta.
+    :no-index:
     """
     __tablename__ = 'klienci'
     __table_args__ = (
@@ -149,6 +167,7 @@ class Job(db.Model):
 
     Relationships:
         stanowisko (relationship): Relacja do tabeli 'Employee', reprezentująca pracowników na tym stanowisku.
+    :no-index:
     """
     __tablename__ = 'role'
     __table_args__ = (
@@ -175,6 +194,7 @@ class Employee(db.Model):
     Relationships:
         rola (relationship): Relacja do tabeli 'Job', reprezentująca stanowisko pracownika.
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia obsługiwane przez pracownika.
+    :no-index:
     """
     __tablename__ = 'pracownicy'
     __table_args__ = (
@@ -201,6 +221,7 @@ class PriceList(db.Model):
 
     Relationships:
         klasa_p (relationship): Relacja do tabeli 'CarClass', reprezentująca klasę pojazdu.
+    :no-index:
     """
     __tablename__ = 'cennik'
     __table_args__ = (
@@ -226,6 +247,7 @@ class Rental(db.Model):
         klient (relationship): Relacja do tabeli `klienci`, określająca klienta.
         auto (relationship): Relacja do tabeli `auta`, określająca wypożyczone auto.
         pracownik (relationship): Relacja do tabeli `pracownicy`, określająca pracownika obsługującego wypożyczenie.
+    :no-index:
     """
     __tablename__ = 'wypozyczenia'
     __table_args__ = (
@@ -244,6 +266,7 @@ class Rental(db.Model):
     klient = db.relationship('Client', back_populates='wypozyczenia')
     auto = db.relationship('Car', back_populates='wypozyczenia')
     pracownik = db.relationship('Employee', back_populates='wypozyczenia')
+    platnosc = db.relationship('Payment', back_populates='wypozyczenia')
 
 
 status_enum = ENUM('udane', 'nieudane', 'oczekujące', name='status_enum', schema='wypozyczalnia')
@@ -263,6 +286,7 @@ class Order(db.Model):
     Relationships:
         klient (relationship): Relacja do tabeli 'Client', określająca klienta składającego zamówienie.
         model (relationship): Relacja do tabeli 'Model', określająca model zamawianego pojazdu.
+    :no-index:
     """
     __tablename__ = 'zamowienia'
     __table_args__ = (
@@ -290,6 +314,7 @@ class CarDetails(db.Model):
         numer_rejestracyjny (str): Numer rejestracyjny samochodu.
         id_klasa (int): Identyfikator klasy pojazdu.
         nazwa_klasy (str): Nazwa klasy pojazdu.
+    :no-index:
     """
     __tablename__ = 'szczegoly_aut'
     __table_args__ = (
@@ -319,6 +344,7 @@ class RentalDetails(db.Model):
         data_oddania (date): Data zakończenia wypożyczenia.
         id_pracownik (int): Identyfikator pracownika realizującego wypożyczenie.
         pracownik (str): Imię i nazwisko pracownika.
+    :no-index:
     """
     __tablename__ = 'szczegoly_wypozyczenia'
     __table_args__ = {'schema': 'wypozyczalnia'}
@@ -335,6 +361,25 @@ class RentalDetails(db.Model):
     id_pracownik = db.Column(db.Integer)
     pracownik = db.Column(db.String(128))
 
+class Payment(db.Model):
+    """
+    Model tabeli 'platnosci', reprezentujący dane dotyczące płatności w systemie wypożyczalni.
+
+    Attributes:
+        id_platnosc (int): Klucz główny, identyfikator płatności.
+        id_wypozyczenia (int): Identyfikator powiązanego wypożyczenia.
+        kwota (decimal): Kwota płatności za dane wypożyczenie.
+        wypozyczenia (Rental): Relacja do modelu 'Rental', reprezentująca powiązanie płatności z wypożyczeniem.
+    :no-index:
+    """
+    __tablename__ = 'platnosci'
+    __table_args__ = {'schema': 'wypozyczalnia'}
+
+    id_platnosc = db.Column(db.Integer, primary_key=True)
+    id_wypozyczenia = db.Column(db.Integer, db.ForeignKey('wypozyczalnia.wypozyczenia.id_wypozyczenia'),nullable=False)
+    kwota = db.Column(db.Numeric(10,2), nullable=False)
+    wypozyczenia = db.relationship('Rental', back_populates='platnosc')
+
 context_data = {
     "cars": {'data': [Model, Brand]},
     "models": { 'data' : [Brand, CarClass]},
@@ -345,7 +390,8 @@ context_data = {
     'workers' : {'data' : [Job]},
     'pricelist' : {'data' : []},
     'rentals' : {'data' : [Client, Model, Brand]},
-    'rentals_cost' : {}
+    'rentals_cost' : {},
+    'payments' : {'data' : []}
 }
 
 labels = {
@@ -358,23 +404,10 @@ labels = {
     'workers' : ['ID', 'Imie', 'Nazwisko', 'Telefon', 'Stanowisko'],
     'pricelist' : ['ID', "Klasa", "Stawka za dzień"],
     'rentals' : ['ID', 'Klient', 'Numer rejestracyjny', 'Marka', 'Model', 'Początek', 'Koniec', 'Pracownik wynajmujący'],
-    'orders' : ['ID' , 'Klient', 'Model', 'Początek', 'Koniec', 'Status']
+    'orders' : ['ID' , 'Klient', 'Model', 'Początek', 'Koniec', 'Status'],
+    'payments' : ['ID', 'ID wypozyczenia', 'Kwota']
 }
-
-
-@app.route('/test_db')
-def test_db():
-    try:
-        conn = psycopg2.connect(DB_URL)
-        cursor = conn.cursor()
-        cursor.execute("SELECT version();")
-        db_version = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        return f"Polaczono z baza danych. Wersja PostgresSQL: {db_version[0]}"
-    except Exception as e:
-        return f"Blad polaczenia: {e}"
-    
+  
 @app.route('/')
 def home():
     """
@@ -482,6 +515,7 @@ def jobs_details():
 
 @app.route('/workers')
 def workers_details():
+    print("ELO")
     """
     Widok listy pracowników.
 
@@ -536,6 +570,31 @@ def price_list():
     data = db.session.query(PriceList.id_cennik, CarClass.nazwa, PriceList.stawka_za_dzien).join(PriceList, PriceList.id_klasa == CarClass.id_klasa).all()
     return render_template('pricelist.html', title="Cennik", labels=labels['pricelist'], data=data, context="pricelist")
 
+@app.route('/payments', methods= ['GET', 'POST'])
+def payment_details():
+    """
+    Widok szczegółów płatności.
+
+    Pobiera dane o płatnościach, w tym ID płatności, ID wypożyczenia oraz kwotę.
+
+    Returns:
+        str: Renderowany szablon HTML z listą płatności.
+    """
+    data = db.session.query(Payment.id_platnosc, Payment.id_wypozyczenia, Payment.kwota).all()
+    return render_template('payments.html', title="Płatności", labels=labels['payments'], data = data, context="payments")
+
+@app.route('/incomes', methods =['GET', 'POST'])
+def income():
+    """
+    Widok przychodów.
+
+    Wyświetla dane dotyczące całkowitych i średnich przychodów.
+
+    Returns:
+        str: Renderowany szablon HTML z podsumowaniem przychodów.
+    """
+    return render_template('incomes.html', title="Przychody", context="incomes")
+
 
 @app.route('/data', methods=['GET', 'POST'])
 def data_view():
@@ -580,6 +639,107 @@ def get_brands(brand_id):
     model_list = [{'id_model': row[0], 'nazwa_model': row[1]} for row in rows]
     cursor.close()
     return jsonify(model_list)
+
+@app.route('/incomes/all')
+def get_raport():
+    """
+    Wyświetla raport finansowy.
+
+    Pobiera dane o całkowitych i średnich przychodach oraz przychodach na klasy aut.
+
+    Returns:
+        str: Renderowany szablon HTML z raportem finansowym.
+    """
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM wypozyczalnia.raport_finansowy;")
+    report = [cursor.fetchone()]
+
+    query = "SELECT * FROM wypozyczalnia.przychody_na_klasy_aut();"
+    cursor.execute(query)
+    class_report = cursor.fetchall()
+    cursor.close()
+    
+    cursor.close()
+    return render_template('incomes.html', title = "Podsumowanie finansowe", labels=['Klasa', 'Liczba wypożyczeń', 'Całkowity przychód'],labels2=['Całkowity przychód' , 'Średni przychód'], data=class_report, report=report)
+    
+@app.route('/available_cars')
+def available_cars():
+    """
+    Wyświetla widok dla wyszukiwania dostępnych aut.
+
+    Returns:
+        str: Renderowany szablon HTML dla wyszukiwania dostępnych samochodów.
+    """  
+    return render_template('available_cars.html', title = "Dostępność aut")
+
+@app.route('/popular_cars')
+def popular_cars():
+    """
+    Wyświetla widok dla wyszukiwania najpopularniejszych modeli.
+
+    Returns:
+        str: Renderowany szablon HTML dla wyszukiwania najpopularniejszych modeli samochodów.
+    """  
+    return render_template('popular_cars.html', title = "Wyszukaj najpopularniejsze modele")
+
+
+
+@app.route("/available_cars/search", methods=['GET', 'POST'])
+def available_cars_search():
+    """
+    Przeszukuje dostępne samochody w podanym przedziale czasowym.
+
+    Args:
+        data_rozpoczecia (str): Data rozpoczęcia wynajmu.
+        data_zakonczenia (str): Data zakończenia wynajmu.
+
+    Returns:
+        str: Renderowany szablon HTML z wynikami wyszukiwania, liczbą dostępnych aut, modeli i marek.
+    """
+    data_rozpoczecia = request.form.get("search_start_date")
+    data_zakonczenia = request.form.get("search_end_date")
+    cursor = conn.cursor()
+
+    query_cars = "SELECT * FROM wypozyczalnia.dostepne_auta_w_danym_terminie(%s, %s);"
+    cursor.execute(query_cars, (data_rozpoczecia, data_zakonczenia))
+    cars = cursor.fetchall()
+    labels = ["ID", "Model", "Marka", "Numer rejestracyjny", "Klasa"]
+
+    query_amount = "SELECT * FROM wypozyczalnia.policz_auta_dostepne_w_danym_terminie(%s, %s);"
+    cursor.execute(query_amount, (data_rozpoczecia, data_zakonczenia))
+    amount = cursor.fetchone()
+
+    query_models_amount = "SELECT * FROM wypozyczalnia.policz_modele_auta_dostepne_w_danym_terminie(%s, %s);"
+    cursor.execute(query_models_amount, (data_rozpoczecia, data_zakonczenia))
+    models_amount = cursor.fetchall()
+    labels2 = ['Marka', 'Ilość']
+
+    query_brands_amount = "SELECT * FROM wypozyczalnia.policz_marki_auta_dostepne_w_danym_terminie(%s, %s);"
+    cursor.execute(query_brands_amount, (data_rozpoczecia, data_zakonczenia))
+    brands_amount = cursor.fetchall()
+    labels3 = ['Marka', 'Model', 'Ilość']
+
+    return render_template('available_cars.html', title = "Dostępność aut", labels=labels, data=cars, amount=amount, models=models_amount, labels2=labels2, brands=brands_amount, labels3=labels3)
+
+@app.route("/popular_cars/search", methods=['GET', 'POST'])
+def popular_cars_search():
+    """
+    Wyszukuje najpopularniejsze modele samochodów.
+
+    Args:
+        rental_amount (int): Minimalna liczba wypożyczeń modelu, aby został uwzględniony w wynikach.
+
+    Returns:
+        str: Renderowany szablon HTML z listą najpopularniejszych modeli samochodów.
+    """
+    rental_amount = request.form.get("rental_amount")
+    cursor = conn.cursor()
+    query = "SELECT * FROM wypozyczalnia.najpopularniejsze_modele(%s);"
+    cursor.execute(query, rental_amount)
+    cars = cursor.fetchall()
+
+    return render_template('popular_cars.html', title = "Dostępność aut", labels=['Model', 'Marka', 'Liczba wypożyczeń'], data=cars)
+     
 
 
 @app.route('/cars/add', methods=['POST'])
@@ -754,6 +914,8 @@ def add_client():
         else:
             display_error(error_message=error_message)
         return redirect('/clients')
+    
+
     
 @app.route('/jobs/add', methods=['POST'])
 def add_job():

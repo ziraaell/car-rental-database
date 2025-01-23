@@ -1,0 +1,28 @@
+{% extends "data.html" %}
+
+{% block button %}   
+{% endblock %}
+
+{% block main %}
+{% if report %}
+<h3>Całkowity przychód</h3>
+<table id="data-table">
+    <thead>
+        <tr>
+            {% for label in labels2 %}
+                <th>{{ label }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in report %}
+            {% for value in obj %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>        
+</table>
+<br>
+{% endif %}
+{% endblock %}

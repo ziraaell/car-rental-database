@@ -1,0 +1,16 @@
+{% extends "data.html" %}
+
+{% block button %}
+{% endblock %}
+
+
+{% block form %}
+<form id="add-form" action="/popular_cars/search" method="post">
+    <input type="number" id="rental_amount" name="rental_amount" placeholder="Ilość wypożyczeń" min = '0', required>
+    <button type="submit">Wyszukaj</button>
+</form>
+<br>
+{% endblock %}
+
+{% block main %}
+{% endblock %}

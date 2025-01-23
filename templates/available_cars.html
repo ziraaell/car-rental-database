@@ -1,0 +1,68 @@
+{% extends "data.html" %}
+
+{% block button %}
+{% endblock %}
+
+
+{% block form %}
+<form id="add-form" action="/available_cars/search" method="post">
+    <label for="search_start_date">Wybierz datę początkową:</label>
+    <br>
+    <input type="date" id="search_start_date" name="search_start_date" required>
+    <br>
+    <label for="search_end_date">Wybierz datę końcową:</label>
+    <br>
+    <input type="date" id="search_end_date" name="search_end_date" required>
+    <br>
+    <button type="submit">Wyszukaj auta w podanym terminie</button>
+</form>
+<br>
+{% endblock %}
+{% block main %}
+{% if amount %}
+<h2>Liczba dostępnych aut</h2>
+    <p>{{ amount[0] }}</p>
+<br>
+<h3>Dostępne Auta wg Marki </h3>
+
+<table id="data-table">
+    <thead>
+        <tr>
+            {% for label in labels2 %}
+                <th>{{ label }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in models %}
+            {% for value in obj %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>        
+</table>
+<br>
+<h3>Dostępne auta wg modelu</h3>
+<table id="data-table">
+    <thead>
+        <tr>
+            {% for label in labels3 %}
+                <th>{{ label }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in brands %}
+            {% for value in obj %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>        
+</table>
+
+<br>
+<h3>Wszystkie dostępne auta</h3>
+{% endif %}
+{% endblock %}

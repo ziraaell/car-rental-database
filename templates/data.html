@@ -23,6 +23,8 @@
 
     {% block form %}
     {% endblock %}
+    {% block main %}
+    {% endblock %}
 
     <table id="data-table">
         <thead>
@@ -30,15 +32,15 @@
                 {% for label in labels %}
                     <th>{{ label }}</th>
                 {% endfor %}
-                <!-- <th>Usuń rekord</th> -->
             </tr>
         </thead>
         <tbody>
             {% for obj in data %}
-            <!-- <tr onclick="location.href = window.location.href + '/' + '{{ obj[0] }}'"> -->
                 {% for value in obj %}
                 <td>{{ value }}</td>
                 {% endfor %}
+                {% if not request.path.startswith('/incomes') %}
+                {% if not request.path.startswith('/available_cars') and not request.path.startswith('/popular_cars') %}
                 <td>
                     <form method="POST" onsubmit="this.action = window.location.pathname + '/delete/' + '{{ obj[0] }}';">
                         <button id="delete-record" type="submit" onclick="return confirm('Czy na pewno chcesz usunąć ten rekord?');" style="background: none; border: none; color: red; cursor: pointer;">
@@ -46,6 +48,8 @@
                         </button>
                     </form>
                 </td>
+                {% endif %}
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>        
