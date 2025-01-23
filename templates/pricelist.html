@@ -4,9 +4,16 @@
 
 
 {% if mode == "add" %}
-    <form id="add-form" action="/brands/add" method="post">
-        <input type="text" name="brands_brand_name" placeholder="Nazwa marki" required>
-        <button type="submit">Dodaj markę</button>
+    <form id="add-form" action="/pricelist/add" method="post">
+        <select id="price_class_id" name="price_class_id" required>
+            <option value="" disabled selected>Wybierz klase</option>
+            {% for car_class in data_set[0]%}
+                <option value="{{ car_class.id_klasa }}">{{car_class.nazwa }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" id="price" name="price" placeholder="Stawka" required>
+        
+        <button type="submit">Dodaj stawkę</button>
     </form>
 {% endif %}
 {% endblock %}

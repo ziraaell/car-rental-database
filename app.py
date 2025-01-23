@@ -388,7 +388,7 @@ context_data = {
     "clients" : { 'data' : []},
     'jobs' : {'data' : []},
     'workers' : {'data' : [Job]},
-    'pricelist' : {'data' : []},
+    'pricelist' : {'data' : [CarClass]},
     'rentals' : {'data' : [Client, Model, Brand]},
     'rentals_cost' : {},
     'payments' : {'data' : []}
@@ -1029,6 +1029,39 @@ def add_rental():
         else:
             display_error(error_message=error_message)
         return redirect('/rentals')
+    
+
+@app.route('/pricelist/add', methods=['POST'])
+def add_pricelist():
+    """
+    Dodaje nowa pozycje do cennika.
+
+    Dane pobierane są z formularza HTTP POST.
+
+    Returns:
+        Response: Przekierowanie na stronę z listą cen z odpowiednim komunikatem.
+    """
+    id_klasa = request.form.get('price_class_id')
+    stawka = request.form.get('price')
+    try:
+        new_price_list = PriceList(
+            id_klasa  = int(id_klasa),
+            stawka_za_dzien = stawka
+        )
+        db.session.add(new_price_list)
+        db.session.commit()
+        
+        flash(f"Zamówienie zostało pomyślnie dodane", "success")
+        return redirect('/pricelist')
+
+    except Exception as e:
+        db.session.rollback()
+        error_message = getattr(e, 'pgerror', str(e))
+        if "duplicate key value violates unique constraint" in error_message:
+            flash(f"Stawka dla danej klasy już istnieje w bazie danych.", "error")
+        else:
+            display_error(error_message=error_message)
+        return redirect('/pricelist')
 
 def delete_record(model, record_id, identifier_field):
     """
@@ -1051,8 +1084,6 @@ def delete_record(model, record_id, identifier_field):
         return True
     except Exception as e:
         db.session.rollback()
-        error_message = getattr(e, 'pgerror', str(e))
-        flash(f"Wystąpił nieoczekiwany błąd: {error_message}", "error")
         return False
     
 
@@ -1244,7 +1275,7 @@ def display_error(error_message):
     elif "invalid literal for int()" in error_message:
         flash("Błąd: Podano nieprawidłowe dane. Oczekiwano liczby całkowitej.", "error")
     else:
-        flash(f'Wystąpił bląd po stronie bazy {error_message}', "error")
+        flash(f'Wystąpił bląd po stronie bazy', "error")
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
