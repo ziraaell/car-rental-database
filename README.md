@@ -16,7 +16,10 @@ Car Rental is a database project designed to manage a car rental service. It ena
 - Psycopg2: A PostgreSQL adapter for Python to handle database interactions. 
 - Jinja: Template engine for rendering HTML pages dynamically. 
 - Tembo: Cloud-based PostgreSQL hosting platform. 
-- SQL: For creating and managing the database schema and executing queries. 
+- SQL: For creating and managing the database schema and executing queries.
+- JavaScript: Used for displaying dynamic fields when adding new records.
+- HTML: For structuring the web pages.
+- CSS: For styling and layout of the web pages.
 
 
 ## Features
