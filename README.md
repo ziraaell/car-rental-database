@@ -35,9 +35,20 @@ Car Rental is a database project designed to manage a car rental service. It ena
 ## Screenshots
 ### Car List Display
 List of cars available for rent, displaying information such as model, brand, license plate number, and class. 
+
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/17c27a2a-5fb3-4415-afcc-8c76630c47a0" />
+
+### Adding record
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
+
+### Reports Display - Car Availability
+Search for available cars by selecting a start and end date. 
+
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/6fd06c54-de13-4e06-9e14-a1a506b888fe" />
+
+## Available Cars Summary
+Displays the total number of available cars and a breakdown by brand. 
+
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067" />
 
 ## Setup
