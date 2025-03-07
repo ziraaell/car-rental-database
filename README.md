@@ -7,9 +7,6 @@ Car Rental is a database project designed to manage a car rental service. It ena
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 
 ## Technologies Used
 - Python: Main programming language used for backend development. 
@@ -37,13 +34,9 @@ Car Rental is a database project designed to manage a car rental service. It ena
 
 ## Screenshots
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/17c27a2a-5fb3-4415-afcc-8c76630c47a0" />
-![image](https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74)
-![image](https://github.com/user-attachments/assets/6fd06c54-de13-4e06-9e14-a1a506b888fe)
-![image](https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067)
-
-
-
-
+<img width="1264" alt="image" src="(https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/6fd06c54-de13-4e06-9e14-a1a506b888fe" />
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067" />
 
 ## Setup
 What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
