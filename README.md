@@ -44,6 +44,7 @@ List of cars available for rent, displaying information such as model, brand, li
 
 ### Adding record
 Form for adding a new car, including fields for license plate number, year, and model selection.
+
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
 
 ### Reports Display - Car Availability
