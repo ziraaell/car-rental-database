@@ -12,7 +12,8 @@ Car Rental is a database project designed to manage a car rental service. It ena
 - Python: Main programming language used for backend development. 
 - Flask: A lightweight web framework for building the application's backend. 
 - Conda: Used for managing packages and virtual environments. 
-- PostgreSQL: Relational database system used for storing and managing data. 
+- PostgreSQL: Relational database system used for storing and managing data.
+- PL/pgSQL: Used for stored procedures, functions, and triggers in PostgreSQL.
 - Psycopg2: A PostgreSQL adapter for Python to handle database interactions. 
 - Jinja: Template engine for rendering HTML pages dynamically. 
 - Tembo: Cloud-based PostgreSQL hosting platform. 
