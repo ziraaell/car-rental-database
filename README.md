@@ -39,6 +39,7 @@ List of cars available for rent, displaying information such as model, brand, li
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/17c27a2a-5fb3-4415-afcc-8c76630c47a0" />
 
 ### Adding record
+Form for adding a new car, including fields for license plate number, year, and model selection.
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
 
 ### Reports Display - Car Availability
@@ -52,7 +53,13 @@ Displays the total number of available cars and a breakdown by brand.
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067" />
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
+
+```bash
+pip install -r requirements.txt
+```
+
+
 
 Proceed to describe how to install / setup one's local environment / get started with the project.
 
