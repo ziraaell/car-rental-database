@@ -26,14 +26,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class Brand(db.Model):
-    """
-    Reprezentuje markę pojazdu w bazie danych.
-
-    Attributes:
-        id_marka (int): Klucz główny, identyfikator marki.
-        nazwa_marki (str): Nazwa marki pojazdu.
-    :no-index:
-    """
     __tablename__ = 'marki'
     __table_args__ = (
     {'schema': 'wypozyczalnia'},
@@ -59,7 +51,6 @@ class Model(db.Model):
         auta (relationship): Relacja do tabeli 'Car', reprezentująca wszystkie samochody należące do tego modelu.
         klasa (relationship): Relacja do tabeli 'CarClass', określająca klasę, do której przypisany jest model.
         zamowienia (relationship): Relacja do tabeli 'Order', reprezentująca zamówienia, w których wskazano dany model samochodu.
-    :no-index:
     """
     __tablename__ = 'modele'
     __table_args__ = (
@@ -86,7 +77,6 @@ class CarClass(db.Model):
         opis (str): Opcjonalny opis klasy samochodu, zawierający szczegóły dotyczące jej charakterystyki.
         model_k (list[Model]): Relacja do modeli samochodów (Model) powiązanych z daną klasą.
         cennik (list[PriceList]): Relacja do tabeli 'cennik', zawierająca informacje o stawkach za wynajem dla danej klasy samochodów.
-    :no-index:
     """
     __tablename__ = 'klasa'
     __table_args__ = (
@@ -113,7 +103,6 @@ class Car(db.Model):
     Relationships:
         model_a (relationship): Relacja do tabeli 'Model', określająca model pojazdu.
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia, w których uczestniczy ten samochód.
-    :no-index:
     """
     __tablename__ = 'auta'
     __table_args__ = (
@@ -140,7 +129,6 @@ class Client(db.Model):
     Relationships:
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia wykonane przez klienta.
         zamowienia (relationship): Relacja do tabeli 'Order', reprezentująca zamówienia klienta.
-    :no-index:
     """
     __tablename__ = 'klienci'
     __table_args__ = (
@@ -167,7 +155,6 @@ class Job(db.Model):
 
     Relationships:
         stanowisko (relationship): Relacja do tabeli 'Employee', reprezentująca pracowników na tym stanowisku.
-    :no-index:
     """
     __tablename__ = 'role'
     __table_args__ = (
@@ -194,7 +181,6 @@ class Employee(db.Model):
     Relationships:
         rola (relationship): Relacja do tabeli 'Job', reprezentująca stanowisko pracownika.
         wypozyczenia (relationship): Relacja do tabeli 'Rental', reprezentująca wypożyczenia obsługiwane przez pracownika.
-    :no-index:
     """
     __tablename__ = 'pracownicy'
     __table_args__ = (
@@ -221,7 +207,6 @@ class PriceList(db.Model):
 
     Relationships:
         klasa_p (relationship): Relacja do tabeli 'CarClass', reprezentująca klasę pojazdu.
-    :no-index:
     """
     __tablename__ = 'cennik'
     __table_args__ = (
@@ -247,7 +232,6 @@ class Rental(db.Model):
         klient (relationship): Relacja do tabeli `klienci`, określająca klienta.
         auto (relationship): Relacja do tabeli `auta`, określająca wypożyczone auto.
         pracownik (relationship): Relacja do tabeli `pracownicy`, określająca pracownika obsługującego wypożyczenie.
-    :no-index:
     """
     __tablename__ = 'wypozyczenia'
     __table_args__ = (
@@ -286,7 +270,6 @@ class Order(db.Model):
     Relationships:
         klient (relationship): Relacja do tabeli 'Client', określająca klienta składającego zamówienie.
         model (relationship): Relacja do tabeli 'Model', określająca model zamawianego pojazdu.
-    :no-index:
     """
     __tablename__ = 'zamowienia'
     __table_args__ = (
@@ -314,7 +297,6 @@ class CarDetails(db.Model):
         numer_rejestracyjny (str): Numer rejestracyjny samochodu.
         id_klasa (int): Identyfikator klasy pojazdu.
         nazwa_klasy (str): Nazwa klasy pojazdu.
-    :no-index:
     """
     __tablename__ = 'szczegoly_aut'
     __table_args__ = (
@@ -344,7 +326,6 @@ class RentalDetails(db.Model):
         data_oddania (date): Data zakończenia wypożyczenia.
         id_pracownik (int): Identyfikator pracownika realizującego wypożyczenie.
         pracownik (str): Imię i nazwisko pracownika.
-    :no-index:
     """
     __tablename__ = 'szczegoly_wypozyczenia'
     __table_args__ = {'schema': 'wypozyczalnia'}
@@ -370,7 +351,6 @@ class Payment(db.Model):
         id_wypozyczenia (int): Identyfikator powiązanego wypożyczenia.
         kwota (decimal): Kwota płatności za dane wypożyczenie.
         wypozyczenia (Rental): Relacja do modelu 'Rental', reprezentująca powiązanie płatności z wypożyczeniem.
-    :no-index:
     """
     __tablename__ = 'platnosci'
     __table_args__ = {'schema': 'wypozyczalnia'}
