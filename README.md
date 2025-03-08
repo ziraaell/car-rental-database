@@ -43,11 +43,11 @@ The project requirements and dependencies are listed in the requirements.txt fil
 Car-Rental-Databases-Project/
 ├── static/                  # Static files (images, CSS, JS)
 ├── templates/               # HTML templates for the frontend
-├── .gitignore               # Git ignore file for sensitive and unnecessary files
+├── .gitignore               
 ├── BD_Dokumentacja.pdf      # Project documentation (in Polish)
-├── README.md                # Main project documentation
+├── README.md                
 ├── app.py                   # Main backend logic (Flask)
-├── baza.sql                 # SQL schema for the database
+├── baza.sql                 # SQL schema with triggers, functions, views, and initial data
 ├── requirements.txt         # Python dependencies
 ```
 
