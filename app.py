@@ -1,29 +1,24 @@
-import urllib.parse as up
 import psycopg2
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy import CheckConstraint
-from flask_migrate import Migrate, migrate
-from sqlalchemy.sql import text
+# from flask_migrate import Migrate, migrate
+# from sqlalchemy.sql import text
 import os
 from flask import jsonify
 from sqlalchemy import func
-import warnings
-from sqlalchemy.exc import SAWarning
-warnings.filterwarnings("ignore", category=SAWarning)
 
 load_dotenv()
 DB_URL = os.getenv('DATABASE_URL') 
 app = Flask(__name__)
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL2')
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 conn = psycopg2.connect(DB_URL)
 app.secret_key = os.urandom(24)
-
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 class Brand(db.Model):
     __tablename__ = 'marki'
