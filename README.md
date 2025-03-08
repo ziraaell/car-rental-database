@@ -84,6 +84,8 @@ The project requirements and dependencies are listed in the requirements.txt fil
 5. Create the database using the 'baza.sql' file:
   - Ensure you have an active PostgreSQL instance. This can be hosted locally, on Tembo, or any other PostgreSQL hosting service.
   - Run the following command to create the database structure and insert initial data:
+
+
     ```bash 
     psql -h [hostname] -U [username] -W -d [database_name] < baza.sql
     ```
