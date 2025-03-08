@@ -1,4 +1,4 @@
-# Car Rental
+# Car Rental 🚗
 Car Rental is a database project designed to manage a car rental service. It enables storing information about vehicles, customers, reservations, and payments, supporting efficient data management. The system offers features such as adding new rentals, generating reports, and monitoring vehicle availability.
 
 ## Table of Contents
