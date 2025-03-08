@@ -86,17 +86,17 @@ The project requirements and dependencies are listed in the requirements.txt fil
    - Run the following command to create the database structure and insert initial data:
 
 
-    ```bash 
-    psql -h [hostname] -U [username] -W -d [database_name] < baza.sql
-    ```
+     ```bash 
+     psql -h [hostname] -U [username] -W -d [database_name] < baza.sql
+     ```
 
 6. Configure the .env file with database settings:
    - Create a .env file in the root directory and add:
 
 
-    ```bash 
-    DATABASE_URL=postgresql://[username]:[password]@[hostname]:[port]/[database_name]
-    ```
+     ```bash 
+     DATABASE_URL=postgresql://[username]:[password]@[hostname]:[port]/[database_name]
+     ```
         
 7. Run the application locally:
    ```bash 
