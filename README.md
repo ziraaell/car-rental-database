@@ -82,8 +82,8 @@ The project requirements and dependencies are listed in the requirements.txt fil
 ```
 
 5. Create the database using the 'baza.sql' file:
-  - Ensure you have an active PostgreSQL instance. This can be hosted locally, on Tembo, or any other PostgreSQL hosting service.
-  - Run the following command to create the database structure and insert initial data:
+   - Ensure you have an active PostgreSQL instance. This can be hosted locally, on Tembo, or any other PostgreSQL hosting service.
+   - Run the following command to create the database structure and insert initial data:
 
 
     ```bash 
@@ -91,7 +91,7 @@ The project requirements and dependencies are listed in the requirements.txt fil
     ```
 
 6. Configure the .env file with database settings:
-  - Create a .env file in the root directory and add:
+   - Create a .env file in the root directory and add:
 
 
     ```bash 
@@ -104,12 +104,3 @@ The project requirements and dependencies are listed in the requirements.txt fil
     ```
    
   The application will be awailable at: http://127.0.0.1:5000
-
-
-
-
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
