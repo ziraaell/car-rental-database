@@ -1,4 +1,3 @@
-drop schema wypozyczalnia cascade;
 create schema wypozyczalnia;
 
 SET datestyle = 'European, DMY';
