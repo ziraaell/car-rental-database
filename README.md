@@ -89,6 +89,14 @@ The project requirements and dependencies are listed in the requirements.txt fil
     ```bash 
     psql -h [hostname] -U [username] -W -d [database_name] < baza.sql
     ```
+
+5. Configure the .env file with database settings:
+  - Create a .env file in the root directory and add:
+
+
+    ```bash 
+    DATABASE_URL=postgresql://[username]:[password]@[hostname]:[port]/[database_name]
+    ```
     
 6. Configure the .env file with database settings:
    - Create a .env file in the root directory and add:
