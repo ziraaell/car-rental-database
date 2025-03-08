@@ -4,9 +4,8 @@ Car Rental is a database project designed to manage a car rental service. It ena
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
 * [Setup](#setup)
-* [Usage](#usage)
+* [Screenshots](#screenshots)
 
 ## Technologies Used
 - Python: Main programming language used for backend development. 
@@ -34,28 +33,6 @@ Car Rental is a database project designed to manage a car rental service. It ena
 - Payment Processing: Records payments for rentals and links them to corresponding transactions, ensuring all payments are properly tracked. 
 - Reporting and Analysis: Enables generating reports on car availability, popular models, and financial performance.
 - Data Validation and Integrity: Ensures data accuracy through constraints such as unique keys, foreign keys, and checks on data formats and logical date orders. 
-
-
-## Screenshots
-### Car List Display
-List of cars available for rent, displaying information such as model, brand, license plate number, and class. 
-
-<img width="1264" alt="image" src="https://github.com/user-attachments/assets/17c27a2a-5fb3-4415-afcc-8c76630c47a0" />
-
-### Adding record
-Form for adding a new car, including fields for license plate number, year, and model selection.
-
-<img width="1264" alt="image" src="https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
-
-### Reports Display - Car Availability
-Search for available cars by selecting a start and end date. 
-
-<img width="1264" alt="image" src="https://github.com/user-attachments/assets/6fd06c54-de13-4e06-9e14-a1a506b888fe" />
-
-## Available Cars Summary
-Displays the total number of available cars and a breakdown by brand. 
-
-<img width="1264" alt="image" src="https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067" />
 
 ## Setup
 The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
@@ -104,3 +81,24 @@ The project requirements and dependencies are listed in the requirements.txt fil
     ```
    
   The application will be awailable at: http://127.0.0.1:5000
+
+## Screenshots
+### Car List Display
+List of cars available for rent, displaying information such as model, brand, license plate number, and class. 
+
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/17c27a2a-5fb3-4415-afcc-8c76630c47a0" />
+
+### Adding record
+Form for adding a new car, including fields for license plate number, year, and model selection.
+
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/d4cacb25-71b6-4702-b4af-60ebdf5b9e74" />
+
+### Reports Display - Car Availability
+Search for available cars by selecting a start and end date. 
+
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/6fd06c54-de13-4e06-9e14-a1a506b888fe" />
+
+## Available Cars Summary
+Displays the total number of available cars and a breakdown by brand. 
+
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/ccf0c95e-3e18-41f2-92c2-075573a0d067" />
