@@ -96,7 +96,7 @@ The project requirements and dependencies are listed in the requirements.txt fil
 
    ```bash 
       DATABASE_URL=postgresql://[username]:[password]@[hostname]:[port]/[database_name]
-    ```
+   ```
     
 7. Run the application locally:
    ```bash 
