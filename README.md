@@ -4,6 +4,7 @@ Car Rental is a database project designed to manage a car rental service. It ena
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Features](#features)
+* [Project Structure](#project-structure)
 * [Setup](#setup)
 * [Screenshots](#screenshots)
 
@@ -36,6 +37,18 @@ Car Rental is a database project designed to manage a car rental service. It ena
 
 ## Setup
 The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
+
+## Project structure
+Car-Rental-Databases-Project/
+├── static/                  # Static files (images, CSS, JS)
+├── templates/               # HTML templates for the frontend
+├── .gitignore               # Git ignore file for sensitive and unnecessary files
+├── BD_Dokumentacja.pdf      # Project documentation (in Polish)
+├── README.md                # Main project documentation
+├── app.py                   # Main backend logic (Flask)
+├── baza.sql                 # SQL schema for the database
+├── requirements.txt         # Python dependencies
+
 
 1. Clone repository
  ```bash 
