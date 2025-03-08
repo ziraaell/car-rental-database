@@ -80,34 +80,28 @@ The project requirements and dependencies are listed in the requirements.txt fil
 ```bash 
   pip install -r requirements.txt
 ```
+
 5. Create the database using the 'baza.sql' file:
   - Ensure you have an active PostgreSQL instance. This can be hosted locally, on Tembo, or any other PostgreSQL hosting service.
   - Run the following command to create the database structure and insert initial data:
     ```bash 
     psql -h [hostname] -U [username] -W -d [database_name] < baza.sql
     ```
+    
 6. Configure the .env file with database settings:
    - Create a .env file in the root directory and add
      ```bash 
       DATABASE_URL=postgresql://[username]:[password]@[hostname]:[port]/[database_name]
     ```
+    
 7. Run the application locally:
    ```bash 
       flask run
     ```
+   
   The application will be awailable at: http://127.0.0.1:5000
 
 
-    
-6. The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
-
-```bash
-pip install -r requirements.txt
-```
-
-
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
 
 
 ## Usage
