@@ -35,9 +35,6 @@ Car Rental is a database project designed to manage a car rental service. It ena
 - Reporting and Analysis: Enables generating reports on car availability, popular models, and financial performance.
 - Data Validation and Integrity: Ensures data accuracy through constraints such as unique keys, foreign keys, and checks on data formats and logical date orders. 
 
-## Setup
-The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
-
 ## Project structure
 ```
 Car-Rental-Databases-Project/
@@ -50,6 +47,9 @@ Car-Rental-Databases-Project/
 ├── baza.sql                 # SQL schema with triggers, functions, views, and initial data
 ├── requirements.txt         # Python dependencies
 ```
+
+## Setup
+The project requirements and dependencies are listed in the requirements.txt file, which is located in the root directory of the project.
 
 1. Clone repository
  ```bash 
