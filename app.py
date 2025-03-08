@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy import CheckConstraint
-# from flask_migrate import Migrate, migrate
-# from sqlalchemy.sql import text
 import os
 from flask import jsonify
 from sqlalchemy import func
@@ -18,7 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 conn = psycopg2.connect(DB_URL)
 app.secret_key = os.urandom(24)
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
 
 class Brand(db.Model):
     __tablename__ = 'marki'
